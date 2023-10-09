@@ -1,0 +1,42 @@
+---
+- hosts: local
+  become: true
+
+  pre_tasks:
+    - name: pre | pre_tasks
+      tags: always
+      block:
+        - name: pre | update stuff
+          apt:
+            upgrade: dist
+            update_cache: yes
+          changed_when: False
+      rescue:
+        - set_fact: task_failed=true
+
+- hosts: local
+  tags: base
+  become: true
+  roles:
+    - base
+  vars:
+    deb_architecture:
+      {
+        'armv6l': 'armhf',
+        'armv7l': 'armhf',
+        'aarch64': 'arm64',
+        'x86_64': 'amd64',
+        'i386': 'i386',
+      }
+
+- hosts: local
+  tags: desktop
+  become: true
+  roles:
+    - desktop
+
+- hosts: local
+  tags: always
+  become: true
+  roles:
+    - cleanup

@@ -1,0 +1,76 @@
+---
+branch: master
+
+dconf_package: dconf-cli
+dns_utils_package: dnsutils
+lm_sensors_package: lm-sensors
+nfs_client_package: nfs-common
+rename_package: rename
+ruby_rake_package: rake
+sftp_path: /usr/lib/openssh/sftp-server
+sudo_group: sudo
+vim_package: vim-nox
+
+# cron
+cron_package: cron
+ansible_cron_minute: "*/5"
+
+# ssh
+openssh_package: openssh-server
+openssh_service: ssh
+ssh_port: 22
+ssh_users: "user1 user2"
+
+# platform-specific
+ansible_python_interpreter: /usr/bin/python3
+microcode_amd_install: true
+amd_microcode_package: amd64-microcode
+microcode_intel_install: false
+intel_microcode_package: intel-microcode
+
+# python-specific
+python_flake8_package: python3-flake8
+python_package: python3
+python_pip_package: python3-pip
+python_psutil_package: python3-psutil
+python_pyflakes_package: python3-pyflakes
+python_virtualenv_package: python3-virtualenv
+
+# app defaults
+gui_editor: gvim
+terminal_emulator: terminator
+web_browser: flatpak run org.mozilla.firefox
+
+# application selection
+audacity: true
+authy: true
+autofs: true
+chromium: true
+darktable: true
+firefox: true
+foliate: true
+games: true
+glimpse: true
+keepassxc: true
+libreoffice: true
+lutris: true
+mattermost: true
+minecraft: true
+packer: true
+signal: true
+spotify: true
+steam: true
+syncthing: true
+terraform: true
+thunderbird: true
+todoist: true
+ulauncher: false
+vagrant: true
+virtualbox: true
+vivaldi: true
+vlc: true
+xonotic: true
+
+# desktop environment selection
+gnome: true
+mate: false

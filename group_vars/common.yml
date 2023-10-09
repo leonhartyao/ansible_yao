@@ -1,0 +1,8 @@
+---
+ansible_repo: 'https://github.com/leonhartyao/ansible_yao.git'
+developer_user: "developer"
+maintainer_user: "chao"
+maintainer_passwd: password-hash-goes-here
+swappiness_value: 5
+git_user_name: "Chao Yao"
+git_user_email: "chao.yao@mail.de"
