@@ -5,4 +5,4 @@ localhost ansible_connection=local
 home-ubuntu ip=192.168.0.39
 
 [nas]
-nas ip=192.168.0.41
+nas ip=192.168.0.8
