@@ -1,0 +1,121 @@
+---
+- name: users | {{ maintainer_user }} | create group
+  tags: groups,users
+  group:
+    name: "{{ maintainer_user }}"
+    state: present
+  become: true
+
+- name: users | {{ maintainer_user }} | create user
+  tags: sudo,users
+  user:
+    name: "{{ maintainer_user }}"
+    group: "{{ maintainer_user }}"
+    groups: adm,ansible,sudo
+    state: present
+    comment: "Chao Yao"
+    update_password: on_create
+    # password: "{{ chao_passwd }}"
+    shell: /bin/bash
+  become: true
+
+- name: users | {{ maintainer_user }} | add sudoers file
+  tags: settings,sudo,system,users
+  copy:
+    src: users/sudoers_chao
+    dest: /etc/sudoers.d/chao
+    owner: root
+    group: root
+    mode: 0440
+  become: true
+
+- name: users | {{ maintainer_user }} | create .ssh directory
+  tags: dotfiles,ssh,users
+  file:
+    path: /home/{{ maintainer_user }}/.ssh
+    state: directory
+    owner: "{{ maintainer_user }}"
+    group: "{{ maintainer_user }}"
+    mode: 0700
+  become: true
+
+# - name: users | {{ maintainer_user }} | add public key
+#   tags: dotfiles,jay,ssh,ssh-keys,users
+#   authorized_key:
+#     user: jay
+#     key: "{{ item }}"
+#   with_file:
+#     - authorized_keys/chao_home_ubuntu.pub
+
+- name: users | {{ maintainer_user }} | add public SSH keys
+  template:
+    src: "authorized_keys"
+    dest: "/home/{{ maintainer_user }}/.ssh/authorized_keys"
+    remote_src: false
+    owner: "{{ maintainer_user }}"
+    group: "{{ maintainer_user }}"
+    mode: 0600
+  become: true
+
+- name: users | {{ maintainer_user }} | create config directories
+  tags: dotfiles,users
+  file:
+    path: /home/{{ maintainer_user }}/{{ item.dir }}
+    state: directory
+    owner: "{{ maintainer_user }}"
+    group: "{{ maintainer_user }}"
+    mode: 0700
+  with_items:
+    - { dir: '.bash' }
+    - { dir: '.config' }
+    - { dir: '.config/terminator' }
+    # - { dir: '.config/htop' }
+    # - { dir: '.zsh' }
+
+# - name: users | {{ maintainer_user }} | copy tmux config (server version)
+#   tags: dotfiles,users,tmux,users
+#   copy:
+#     src: users/{{ maintainer_user }}/tmux/tmux.conf.server
+#     dest: /home/{{ maintainer_user }}/.tmux.conf
+#     owner: "{{ maintainer_user }}"
+#     group: "{{ maintainer_user }}"
+#     mode: 0600
+#   when: "'server' not in group_names"
+
+- name: users | {{ maintainer_user }} | copy dotfiles
+  tags: dotfiles,users,users
+  copy:
+    src: users/{{ maintainer_user }}/{{ item.src }}
+    dest: /home/{{ maintainer_user }}/{{ item.dest }}
+    owner: "{{ maintainer_user }}"
+    group: "{{ maintainer_user }}"
+    mode: 0600
+  with_items:
+    - { src: 'bash/bash_aliases', dest: '.bash/bash_aliases' }
+    - { src: 'bash/bash_functions', dest: '.bash/bash_functions' }
+    - { src: 'bash/bashrc', dest: '.bashrc' }
+    - { src: 'git/gitconfig', dest: '.gitconfig' }
+    - { src: 'terminator/config', dest: '.config/terminator/config' }
+    # - { src: 'htop/htoprc', dest: '.config/htop/htoprc' }
+    # - { src: 'zsh/zshrc', dest: '.zshrc' }
+
+# - name: users | {{ maintainer_user }} | copy individual zsh config files
+#   tags: dotfiles,users,zsh
+#   copy:
+#     src: users/{{ maintainer_user }}/zsh/{{ item.src }}
+#     dest: /home/{{ maintainer_user }}/.zsh/{{ item.src }}
+#     owner: "{{ maintainer_user }}"
+#     group: "{{ maintainer_user }}"
+#     mode: 0600
+#   with_items:
+#     - { src: 'aliases.zsh' }
+#     - { src: 'bindkey.zsh' }
+#     - { src: 'completion.zsh' }
+#     - { src: 'exports.zsh' }
+#     - { src: 'functions.zsh' }
+#     - { src: 'history.zsh' }
+#     - { src: 'path.zsh' }
+#     - { src: 'plugins.zsh' }
+#     - { src: 'prompt.zsh' }
+#     - { src: 'setopt.zsh' }
+#     - { src: 'theming.zsh' }

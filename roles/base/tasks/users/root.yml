@@ -1,0 +1,15 @@
+- name: users | root | ensure account is locked
+  user:
+    name: root
+    password_lock: yes
+
+- name: users | root | copy dotfiles
+  copy:
+    src: users/root/{{ item.src }}
+    dest: /root/{{ item.dest}}
+    owner: root
+    group: root
+    mode: 0600
+  with_items:
+      - { src: 'bash/bashrc', dest: '.bashrc' }
+  tags: dotfiles
