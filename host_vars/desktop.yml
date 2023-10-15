@@ -8,7 +8,6 @@ nfs_client_package: nfs-common
 rename_package: rename
 ruby_rake_package: rake
 sftp_path: /usr/lib/openssh/sftp-server
-sudo_group: sudo
 vim_package: vim-nox
 
 # cron

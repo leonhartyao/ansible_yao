@@ -4,7 +4,7 @@
 ###
 
 # hostname
-ansible_hostname: nas
+ansible_nas_hostname: nas
 
 # Will be added to the docker group to give user command line access to docker
 ansible_nas_user: chao
@@ -16,7 +16,8 @@ ansible_nas_email: chao.yao@yaohaha.com
 ansible_nas_domain: yaohaha.com
 
 # Timezone
-ansible_timezone: UTC
+# You can find a list here https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+ansible_timezone: Europe/Berlin
 
 ###
 ### Samba
