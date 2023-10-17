@@ -40,14 +40,15 @@
   become: true
 
 # - name: users | {{ maintainer_user }} | add public key
-#   tags: dotfiles,jay,ssh,ssh-keys,users
+#   tags: dotfiles,ssh,ssh-keys,users
 #   authorized_key:
-#     user: jay
+#     user: "{{ maintainer_user }}"
 #     key: "{{ item }}"
 #   with_file:
 #     - authorized_keys/chao_home_ubuntu.pub
 
 - name: users | {{ maintainer_user }} | add public SSH keys
+  tags: dotfiles,ssh,ssh-keys,users
   template:
     src: "authorized_keys"
     dest: "/home/{{ maintainer_user }}/.ssh/authorized_keys"

@@ -19,6 +19,9 @@ ansible_nas_domain: yaohaha.com
 # You can find a list here https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 ansible_timezone: Europe/Berlin
 
+dconf_package: dconf-cli
+python_psutil_package: python3-psutil
+
 ###
 ### Samba
 ###

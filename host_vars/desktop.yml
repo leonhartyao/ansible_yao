@@ -1,14 +1,5 @@
 ---
-branch: master
-
-dconf_package: dconf-cli
-dns_utils_package: dnsutils
-lm_sensors_package: lm-sensors
-nfs_client_package: nfs-common
-rename_package: rename
-ruby_rake_package: rake
 sftp_path: /usr/lib/openssh/sftp-server
-vim_package: vim-nox
 
 # cron
 cron_package: cron

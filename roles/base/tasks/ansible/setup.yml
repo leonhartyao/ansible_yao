@@ -1,17 +1,39 @@
-- name: ansible setup | add ansible user
-  tags: always,ansible
-  user:
+---
+- name: ansible setup | ensure ansible latest version
+  tags: ansible,ansible-setup
+  package:
     name: ansible
-    system: yes
+    state: latest
 
-- name: ansible setup | set up sudo for ansible user
-  tags: always,ansible
-  copy:
-    src: files/sudoer_ansible
-    dest: /etc/sudoers.d/ansible
-    owner: root
-    group: root
-    mode: 0440
+- name: ansible setup | install required packages
+  tags: ansible,ansible-setup,packages
+  package:
+    name:
+      - "{{ dconf_package }}"
+      - "{{ python_psutil_package }}"
+
+- name: ansible setup | install acl package
+  tags: ansible,ansible-setup,packages
+  package:
+    name: acl
+  when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+
+# - name: ansible setup | remove default ansible directory (/etc/ansible) from host
+#   tags: ansible,ansible-setup
+#   file:
+#     path: /etc/ansible
+#     state: absent
+
+# - name: ansible setup | generate provision script from template
+#   tags: ansible,ansible-setup,scripts
+#   template:
+#     src: provision.sh.j2
+#     dest: /usr/local/bin/provision
+#     owner: root
+#     group: root
+#     mode: 0755
+
+
 
 # TODO: galaxy pull
 
