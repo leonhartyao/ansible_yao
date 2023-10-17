@@ -1,0 +1,53 @@
+---
+- name: packages |install | install apt packages
+  tags: packages,system,settings
+  block:
+    - name: install | apt packages
+      package:
+        state: latest
+        name:
+          # basic stuff and dependencies
+          - mc
+          - git
+          - tig
+          - curl
+          - file
+          - htop
+          - lsof
+          - ncdu
+          - tree
+          - tmux
+          - wget
+          - gnupg
+          # - iotop
+          - rsync
+          - sshfs
+          - whois
+          - xclip
+          - baobab
+          - procps
+          - screen
+          - stacer
+          - hddtemp
+          - python3
+          - dnsutils
+          - neofetch
+          - bleachbit
+          - colordiff
+          - dconf-cli
+          - lm-sensors
+          - nfs-common
+          - terminator
+          - traceroute
+          # - boot-repair
+          - python3-pip
+          - python3-psutil
+          - build-essential
+          - ca-certificates
+          - grub-customizer
+      register: packages
+      until: packages is success
+      retries: 3
+      delay: 10
+  rescue:
+    - set_fact: task_failed=true

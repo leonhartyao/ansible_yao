@@ -1,0 +1,11 @@
+---
+- name: packages | repositories | add grub repository
+  apt_repository:
+    repo: ppa:danielrichter2007/grub-customizer
+    state: present
+
+# TODO: only for desktop
+- name: packages | repositories | add boot-repair repository
+  apt_repository:
+    repo: ppa:yannubuntu/boot-repair
+    state: present
