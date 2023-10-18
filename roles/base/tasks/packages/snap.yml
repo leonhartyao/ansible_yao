@@ -1,0 +1,16 @@
+---
+- name: update snaps
+  shell:
+    cmd: snap refresh
+  become: true
+
+- name: install | snap packages
+  block:
+    - name: install | snap packages
+      community.general.snap:
+        name:
+        - gping
+        - canonical-livepatch
+        state: present
+  rescue:
+    - set_fact: task_failed=true

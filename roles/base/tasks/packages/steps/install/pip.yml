@@ -1,5 +1,0 @@
-- name: install | pip packages
-  pip:
-    name:
-      - speedtest-cli
-    state: present

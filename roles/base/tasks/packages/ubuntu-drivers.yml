@@ -1,3 +1,4 @@
+---
 - name: packages | ubuntu drivers | check devices
   shell: ubuntu-drivers devices
 

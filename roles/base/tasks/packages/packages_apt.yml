@@ -7,7 +7,10 @@
         state: latest
         name:
           # basic stuff and dependencies
+          - jq
           - mc
+          - bat
+          - duf
           - git
           - tig
           - curl
@@ -15,7 +18,7 @@
           - htop
           - lsof
           - ncdu
-          - tree
+          - tre-command
           - tmux
           - wget
           - gnupg
@@ -24,20 +27,19 @@
           - sshfs
           - whois
           - xclip
-          - baobab
+          # - browsh
           - procps
           - screen
-          - stacer
+          - glances
           - hddtemp
           - python3
           - dnsutils
           - neofetch
-          - bleachbit
           - colordiff
+          # - diff-so-fancy
           - dconf-cli
           - lm-sensors
           - nfs-common
-          - terminator
           - traceroute
           # - boot-repair
           - python3-pip
