@@ -22,6 +22,10 @@ ansible_timezone: Europe/Berlin
 dconf_package: dconf-cli
 python_psutil_package: python3-psutil
 
+swappiness_value: 5
+
+ssh_port: 37210
+
 ###
 ### Samba
 ###

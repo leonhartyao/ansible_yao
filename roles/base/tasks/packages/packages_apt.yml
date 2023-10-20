@@ -1,8 +1,23 @@
 ---
-- name: packages |install | install apt packages
+- name: packages | base apt packages
   tags: packages,system,settings
   block:
-    - name: install | apt packages
+    - name: packages | update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
+      register: result
+      until: result is succeeded
+
+    - name: packages | upgrade apt packages # noqa package-latest
+      ansible.builtin.apt:
+        upgrade: yes
+        state: latest
+      when: keep_packages_updated
+      tags:
+        - skip_ansible_lint
+
+    - name: packages | install apt packages
       package:
         state: latest
         name:

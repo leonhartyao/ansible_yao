@@ -7,3 +7,4 @@ swappiness_value: 5
 git_user_name: "Chao Yao"
 git_user_email: "chao.yao@mail.de"
 keep_apt_pkg_updated: true
+ansible_cron_minute: "*/5"

@@ -69,6 +69,7 @@
   with_items:
     - { dir: '.bash' }
     - { dir: '.config' }
+    # TODO: desktop only
     - { dir: '.config/terminator' }
     # - { dir: '.config/htop' }
     # - { dir: '.zsh' }

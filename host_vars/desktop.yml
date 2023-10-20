@@ -1,14 +1,10 @@
 ---
 sftp_path: /usr/lib/openssh/sftp-server
-
-# cron
-cron_package: cron
-ansible_cron_minute: "*/5"
+swappiness_value: 5
 
 # ssh
-openssh_package: openssh-server
 openssh_service: ssh
-ssh_port: 22
+ssh_port: 37210
 ssh_users: "user1 user2"
 
 # platform-specific
